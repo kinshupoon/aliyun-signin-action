@@ -1,20 +1,20 @@
-name: Aliyun Signin
+name: EPG Update
 
 on:
+  push:
   schedule:
-   # 每天国际时间 14:40 运行一次, 中国时间 22:40
-    - cron: '- - - - -'
-  workflow_dispatch:
+    - cron: 0 * * * *
+
 jobs:
-  signin:
-    name: Aliyun Signin
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: ImYrS/aliyun-auto-signin@main
-        with:
-          REFRESH_TOKENS: ${{ secrets.REFRESH_TOKENS }}
-          GP_TOKEN: ${{ secrets.GP_TOKEN}}
-          PUSH_TYPES: 'ServerChan,PushPlus'
-          DO_NOT_REWARD: 'false'
-          SERVERCHAN_SEND_KEY: ${{ secrets.SERVERCHAN_SEND_KEY }}
-          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+    - uses: actions/checkout@v3
+    - name: EPG Update
+      run: |
+        rm -f e.xml && wget https://epg.112114.xyz/pp.xml -O e.xml
+        git config --global user.name kinshupoon
+        git config --global user.email 1062253873@qq.com
+        git add e.xml
+        git commit -m "Update e.xml"
+        git push -f origin main
