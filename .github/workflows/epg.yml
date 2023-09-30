@@ -27,8 +27,8 @@ jobs:
         
     - name: 提交修改
       run: |
-        git config --global user.name "Your Name"
-        git config --global user.email "youremail@example.com"
+        git config --global user.name "kinshupoon"
+        git config --global user.email "1062253873@qq.com"
         git add .
         git commit -m "Update EPG files"
         git push
