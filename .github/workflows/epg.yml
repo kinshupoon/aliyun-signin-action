@@ -1,0 +1,34 @@
+name: 自动下载和汇总EPG节目表
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  download_and_collect:
+    runs-on: ubuntu-latest
+  
+    steps:
+    - name: Checkout代码仓库
+      uses: actions/checkout@v2
+
+    - name: 创建目录
+      run: |
+        mkdir ./epg
+        mkdir ./summary
+      
+    - name: 下载EPG节目表
+      run: |
+        wget -O ./epg/$(date +%Y%m%d).xml https://epg.112114.xyz/epg.xml
+      
+    - name: 更新汇总文件
+      run: |
+        cat ./epg/*.xml > ./summary/all.xml
+        
+    - name: 提交修改
+      run: |
+        git config --global user.name "Your Name"
+        git config --global user.email "youremail@example.com"
+        git add .
+        git commit -m "Update EPG files"
+        git push
