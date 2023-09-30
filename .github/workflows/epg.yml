@@ -1,4 +1,4 @@
-name: 自动下载和汇总EPG节目表
+name: EPG Update
 
 on:
   schedule:
