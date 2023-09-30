@@ -2,7 +2,7 @@ name: 自动下载和汇总EPG节目表
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "6 9 * * *"
 
 jobs:
   download_and_collect:
