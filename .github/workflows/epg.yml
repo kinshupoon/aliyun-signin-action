@@ -2,7 +2,7 @@ name: EPG Update
 
 on:
   schedule:
-    - cron: "6 9 * * *"
+    - cron: ""
 
 jobs:
   download_and_collect:
